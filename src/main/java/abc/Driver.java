@@ -16,19 +16,19 @@ public class Driver extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");  
-			Connection myConn=DriverManager.getConnection("jdbc.mysql://localhost:3306/sample","root","admin");
-			Statement stmt=myConn.createStatement();
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  
+			Connection con=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=servletDb","sa","Mharcet123@");  
+			Statement stmt=con.createStatement();
 			System.out.println("hello");
 			ResultSet rs=stmt.executeQuery("select * from info");
 			while(rs.next())  
 				System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));  
-				myConn.close();  
+				con.close();  
 				
 					
 		}catch(Exception e)
 		{
-			 System.out.println(e);
+			 e.printStackTrace();
 		}
 	}
 
