@@ -17,13 +17,18 @@ public class Driver extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");  
-			Connection myConn=DriverManager.getConnection("jdbc.mysql://localhost/sampledb","root","admin");
+			Connection myConn=DriverManager.getConnection("jdbc.mysql://localhost:3306/sample","root","admin");
 			Statement stmt=myConn.createStatement();
-			ResultSet rs=stmt.executeQuery("select * from info");		
+			System.out.println("hello");
+			ResultSet rs=stmt.executeQuery("select * from info");
+			while(rs.next())  
+				System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));  
+				myConn.close();  
+				
 					
 		}catch(Exception e)
 		{
-			
+			 System.out.println(e);
 		}
 	}
 
